@@ -5,6 +5,7 @@ import json
 import logging
 import asyncio
 import aiohttp
+from aiohttp import web
 from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
 from typing import Optional
@@ -70,6 +71,24 @@ try:
     BR_TZ = ZoneInfo("America/Sao_Paulo")
 except Exception:
     BR_TZ = timezone(timedelta(hours=-3))
+
+
+async def handle(request):
+    return web.Response(text="Incitatus está vivo.")
+
+
+async def start_web_server():
+    app = web.Application()
+    app.add_routes([web.get("/", handle)])
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
+    await site.start()
+
+
+async def main():
+    await start_web_server()
+    await bot.start(TOKEN)
 
 
 def load_json(path, default):
@@ -837,6 +856,7 @@ async def on_ready():
     if not check_new_members.is_running():
         check_new_members.start()
 
+    asyncio.run(main())
     logging.info(f"Bot online como {bot.user}")
 
 bot.run(TOKEN)
