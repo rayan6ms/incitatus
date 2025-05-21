@@ -73,24 +73,6 @@ except Exception:
     BR_TZ = timezone(timedelta(hours=-3))
 
 
-async def handle(request):
-    return web.Response(text="Incitatus está vivo.")
-
-
-async def start_web_server():
-    app = web.Application()
-    app.add_routes([web.get("/", handle)])
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
-    await site.start()
-
-
-async def main():
-    await start_web_server()
-    await bot.start(TOKEN)
-
-
 def load_json(path, default):
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
@@ -856,7 +838,24 @@ async def on_ready():
     if not check_new_members.is_running():
         check_new_members.start()
 
-    asyncio.run(main())
     logging.info(f"Bot online como {bot.user}")
 
-bot.run(TOKEN)
+
+async def start_web_server():
+    async def handle(request):
+        return web.Response(text="Incitatus está vivo.")
+
+    app = web.Application()
+    app.add_routes([web.get("/", handle)])
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
+    await site.start()
+
+
+async def main():
+    await start_web_server()
+    await bot.start(TOKEN)
+
+if __name__ == "__main__":
+    asyncio.run(main())
