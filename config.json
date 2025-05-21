@@ -1,0 +1,19 @@
+{
+  "event_channel": 1363652373322662088,
+  "participate_channel": 1373713054763712665,
+  "event_log_channel": 1373710677386072155,
+  "guild_channel": 1374028886072885299,
+  "bot_log_channel": 1374059583047209031,
+  "ranking_channel": 1374151415139663953,
+  "split_channel": 1374022987241754766,
+  "baltop_channel": 1374343694844428370,
+  "info_channel": 1373711350437511178,
+  "register_channel": 1374701110664888330,
+  "event_msg_id": 1374516219838992396,
+  "participate_msg_id": 1374516221135032363,
+  "info_msg_id": 1374726526997889117,
+  "ranking_msg_id": 1374516222770810923,
+  "baltop_msg_id": 1374694156844138546,
+  "register_msg_id": 1374736063997673495,
+  "event_count": 0
+}
