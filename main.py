@@ -545,9 +545,9 @@ async def check_new_members():
         total = pvp + pve
 
         emb = (discord.Embed(title=f"Bem-vindo(a) {name}!", color=0x3498db)
-               .add_field(name="PvP", value=format_fame(pvp), inline=True)
-               .add_field(name="PvE", value=format_fame(pve), inline=True)
-               .add_field(name="Total", value=format_fame(total), inline=False)
+               .add_field(name="🏹 Fama PvP", value=format_fame(pvp), inline=True)
+               .add_field(name="🧌 Fama PvE", value=format_fame(pve), inline=True)
+               .add_field(name="🏆 Fama Total", value=format_fame(total), inline=False)
                .set_footer(text=datetime.now(BR_TZ).strftime("Ingressou em: %d/%m/%Y %H:%M")))
 
         await channel.send(embed=emb)
