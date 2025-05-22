@@ -134,6 +134,7 @@ class DiscordLogHandler(logging.Handler):
 
 root = logging.getLogger()
 root.setLevel(logging.INFO)
+logging.getLogger("discord").setLevel(logging.WARNING)
 root.addHandler(logging.FileHandler("discord_bot.log", encoding="utf-8", mode="w"))
 root.addHandler(DiscordLogHandler())
 logging.getLogger("aiohttp.access").setLevel(logging.WARNING)
