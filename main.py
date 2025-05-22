@@ -528,9 +528,8 @@ async def check_new_members():
                     data = await resp.json()
             break
         except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-            logging.warning(f"[Albion API] tentativa {attempt}/3 falhou ({e})")
-    if data is None:
-        logging.warning("[Albion API] 3 tentativas falharam; abortando rodada.")
+            if attempt == 3:
+                logging.warning(f"[Albion API] 3 tentativas falharam; abortando rodada. Erro: {e}")
         return
 
     current_names = {m["Name"] for m in data}
